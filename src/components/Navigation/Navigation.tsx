@@ -1,13 +1,15 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { getCurrentTheme, toggleTheme, setNewTheme } from "@/utils/theme";
 import { STYLES } from "@/constants/styles";
 import Switch from "@/components/Switch/Switch";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
+import { ToastContainer } from "react-toastify";
 
 export default function Navigation() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     const currentTheme = getCurrentTheme();
@@ -27,6 +29,24 @@ export default function Navigation() {
       style={{ height: STYLES.NAV_HEIGHT }}
       className="w-full flex items-center justify-between px-10 bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100"
     >
+      <div className="absolute">
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick={true}
+          rtl={false}
+          pauseOnFocusLoss={true}
+          draggable={true}
+          pauseOnHover={true}
+          theme={theme}
+          progressStyle={{
+            background: "#07bc0c",
+          }}
+        />
+      </div>
+
       <h1 className="text-3xl font-bold">Key Vault</h1>
       <Switch
         checked={theme === "dark"}
