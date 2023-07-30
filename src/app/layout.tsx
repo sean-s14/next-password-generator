@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navigation />
         <main
-          className="bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-100"
+          className="flex bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-100"
           style={{
             minHeight: `calc(100vh - ${STYLES.NAV_HEIGHT}px)`,
           }}

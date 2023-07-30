@@ -4,6 +4,23 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Clipboard from "@/components/Clipboard/Clipboard";
 import Switch from "@/components/Switch/Switch";
+import Footer from "@/components/Footer/Footer";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+const borderColor = (state: boolean) => {
+  if (state) return "border-green-400 dark:border-green-600";
+  return "border-neutral-400 dark:border-neutral-700";
+};
+
+const innerBgColor = (state: boolean) => {
+  if (state) return "bg-green-400 dark:bg-green-600";
+  return "bg-neutral-400 dark:bg-neutral-700";
+};
+
+const outerBgColor = (state: boolean) => {
+  if (state) return "bg-green-200 dark:bg-green-300";
+  return "bg-neutral-300 dark:bg-neutral-500";
+};
 
 export default function Home() {
   const [passwordLength, setPasswordLength] = useState(16);
@@ -13,6 +30,7 @@ export default function Home() {
   const [includeSymbols, setIncludeSymbols] = useState(true);
 
   const [password, setPassword] = useState<string | null>(null);
+  const [loadingPassword, setLoadingPassword] = useState(false);
 
   function notify() {
     toast.success("Copied to clipboard!");
@@ -44,21 +62,6 @@ export default function Home() {
     },
   ];
 
-  const borderColor = (state: boolean) => {
-    if (state) return "border-green-400 dark:border-green-600";
-    return "border-neutral-400 dark:border-neutral-700";
-  };
-
-  const innerBgColor = (state: boolean) => {
-    if (state) return "bg-green-400 dark:bg-green-600";
-    return "bg-neutral-400 dark:bg-neutral-700";
-  };
-
-  const outerBgColor = (state: boolean) => {
-    if (state) return "bg-green-200 dark:bg-green-300";
-    return "bg-neutral-300 dark:bg-neutral-500";
-  };
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const options = {
@@ -68,6 +71,7 @@ export default function Home() {
       numbers: includeNumbers,
       symbols: includeSymbols,
     };
+    setLoadingPassword(true);
     fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -75,12 +79,29 @@ export default function Home() {
       },
       body: JSON.stringify(options),
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (res.status !== 200) {
+          console.log(res);
+          const data = await res.json();
+          if (data?.error) {
+            throw new Error(data.error);
+          } else {
+            throw new Error("Something went wrong!");
+          }
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         if (data?.password) setPassword(data.password);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        toast.error(err.message);
+        console.error(err);
+      })
+      .finally(() => {
+        setLoadingPassword(false);
+      });
   }
 
   const clipboardProps: { handleClick: () => void; text?: string } = {
@@ -92,22 +113,31 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-between p-24">
+    <div className="min-h-full min-w-full pt-20 flex flex-col items-center justify-between">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 p-6 rounded-lg min-w-fit bg-neutral-200 dark:bg-neutral-700"
       >
         <Clipboard {...clipboardProps} />
-        <div className={optionStyles} style={{ marginTop: 30 }}>
-          <span>Password Length</span>
+        <label htmlFor="password-length" style={{ marginTop: 20 }}>
+          Password Length: {passwordLength}
+        </label>
+        <div
+          className={
+            "flex justify-between items-center gap-2 w-80 bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg font-semibold text-neutral-800 dark:text-neutral-100"
+          }
+        >
+          <span>4</span>
           <input
-            type="number"
-            min={1}
-            max={128}
+            id="password-length"
+            type="range"
+            min={4}
+            max={32}
             value={passwordLength}
             onChange={(e) => setPasswordLength(Number(e.target.value))}
-            className="py-1 px-2 rounded w-20 border-[3px] border-neutral-400 dark:border-neutral-700 text-neutral-600 dark:text-neutral-100 bg-neutral-200 dark:bg-neutral-600 focus:outline-neutral-700 dark:focus:outline-neutral-400"
+            className="py-3 w-full cursor-pointer focus:outline-neutral-700 dark:focus:outline-neutral-400 accent-green-400 dark:accent-green-600"
           />
+          <span>32</span>
         </div>
 
         {BOOLEAN_OPTIONS.map((option) => (
@@ -125,12 +155,20 @@ export default function Home() {
         ))}
 
         <button
-          className="w-full mt-4 py-3 rounded-lg font-bold text-neutral-600 hover:text-neutral-100 dark:text-neutral-100 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-800 hover:dark:bg-neutral-600 transition-colors duration-200"
+          className={`flex items-center justify-center max-h-10 w-full mt-4 py-3 rounded-lg font-bold text-neutral-600 hover:text-neutral-100 dark:text-neutral-100 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-800 hover:dark:bg-neutral-600 transition-colors duration-200 ${
+            loadingPassword && "cursor-not-allowed opacity-50"
+          }`}
           type="submit"
+          disabled={loadingPassword}
         >
-          Generate Password
+          {loadingPassword ? (
+            <AiOutlineLoading3Quarters size={25} className="animate-spin" />
+          ) : (
+            <span>Generate Password</span>
+          )}
         </button>
       </form>
+      <Footer />
     </div>
   );
 }
