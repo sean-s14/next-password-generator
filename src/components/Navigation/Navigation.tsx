@@ -7,6 +7,7 @@ import { STYLES } from "@/constants/styles";
 import Switch from "@/components/Switch/Switch";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { ToastContainer } from "react-toastify";
+import Link from "next/link";
 
 export default function Navigation() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -47,7 +48,9 @@ export default function Navigation() {
         />
       </div>
 
-      <h1 className="text-3xl font-bold">Key Vault</h1>
+      <Link href={"/"} className="text-3xl font-bold">
+        Key Vault
+      </Link>
       <Switch
         checked={theme === "dark"}
         handleCheck={handleThemeChange}
