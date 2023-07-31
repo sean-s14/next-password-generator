@@ -24,7 +24,7 @@ const outerBgColor = (state: boolean) => {
 
 export default function Home() {
   const [passwordLength, setPasswordLength] = useState(16);
-  const [includeUppercase, setIncludeUppercase] = useState(false);
+  const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
