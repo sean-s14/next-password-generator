@@ -10,6 +10,7 @@ Key Vault is a password generator built with Next.js 13.
 - cookies-next
 - Storybook
 - Jest
+- Cypress
 
 ## Getting Started
 

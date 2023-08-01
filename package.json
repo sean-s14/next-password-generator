@@ -11,9 +11,11 @@
     "build-storybook": "storybook build",
     "jest": "jest --config jest.config.js",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --component",
-    "cypress:run:quiet": "npm run cypress:run --quiet",
-    "test": "npm run jest && npm run cypress:run:quiet"
+    "cypress:run:e": "cypress run --e2e",
+    "cypress:run:e:quiet": "npm run cypress:run:e -- --quiet",
+    "cypress:run:c": "cypress run --component",
+    "cypress:run:c:quiet": "npm run cypress:run:c -- --quiet",
+    "test": "npm run jest && npm run cypress:run:e:quiet && npm run cypress:run:c:quiet"
   },
   "dependencies": {
     "@types/node": "20.4.4",

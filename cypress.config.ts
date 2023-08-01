@@ -8,4 +8,13 @@ export default defineConfig({
       bundler: "webpack",
     },
   },
+
+  e2e: {
+    video: false,
+    retries: { runMode: 2 },
+    baseUrl: "http://localhost:3000",
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+  },
 });
