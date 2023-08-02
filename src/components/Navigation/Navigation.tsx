@@ -48,7 +48,7 @@ export default function Navigation() {
         />
       </div>
 
-      <Link href={"/"} className="text-3xl font-bold">
+      <Link href={"/"} className="text-2xl xs:text-3xl font-bold">
         Key Vault
       </Link>
       <Switch

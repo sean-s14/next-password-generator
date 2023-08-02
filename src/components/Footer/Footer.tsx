@@ -5,8 +5,10 @@ import { STYLES } from "@/constants/styles";
 export default function Footer() {
   return (
     <footer
-      className="min-w-full flex justify-between items-center gap-2 py-4 px-8 bg-neutral-300 dark:bg-neutral-800 text-md text-neutral-500 dark:text-neutral-400"
-      style={{ height: STYLES.FOOTER_HEIGHT }}
+      className="min-w-full h-fit flex flex-col xs:flex-row justify-between items-start xs:items-center gap-4 py-4 px-8 bg-neutral-300 dark:bg-neutral-800 text-md text-neutral-500 dark:text-neutral-400"
+      style={{
+        minHeight: STYLES.FOOTER_HEIGHT,
+      }}
     >
       <div>
         <h3 className="font-bold">Legal</h3>

@@ -1,9 +1,5 @@
 # TODOs
 
-- Improve responsivity for mobile
-  - Password generator form
-  - Footer
-
 ## Password Generation
 
 - **Avoid ambiguous characters:** The option to exclude characters that are easily confused, such as "I" and "l", or "0" and "O".
