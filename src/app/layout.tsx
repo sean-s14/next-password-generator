@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navigation from "@/components/Navigation/Navigation";
+import Footer from "@/components/Footer/Footer";
 import { STYLES } from "@/constants/styles";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,11 +24,14 @@ export default function RootLayout({
         <main
           className="flex bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-100"
           style={{
-            minHeight: `calc(100vh - ${STYLES.NAV_HEIGHT}px)`,
+            minHeight: `calc(100vh - ${
+              STYLES.NAV_HEIGHT + STYLES.FOOTER_HEIGHT
+            }px)`,
           }}
         >
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

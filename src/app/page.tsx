@@ -4,7 +4,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Clipboard from "@/components/Clipboard/Clipboard";
 import Switch from "@/components/Switch/Switch";
-import Footer from "@/components/Footer/Footer";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const borderColor = (state: boolean) => {
@@ -168,7 +167,6 @@ export default function Home() {
           )}
         </button>
       </form>
-      <Footer />
     </div>
   );
 }

@@ -12,6 +12,5 @@ describe("<Home />", () => {
       .contains("span", "Include Symbols")
       .siblings("button")
       .click();
-    cy.get("footer").should("exist");
   });
 });
