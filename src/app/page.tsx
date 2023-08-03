@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   const optionStyles =
-    "flex justify-between items-center gap-2 xs:gap-6 w-64 xs:w-80 text-base xs:text-md bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg font-semibold text-neutral-800 dark:text-neutral-100";
+    "flex justify-between items-center gap-2 xs:gap-6 w-64 xs:w-80 text-sm xs:text-md bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg font-medium xs:font-semibold text-neutral-800 dark:text-neutral-100";
 
   const BOOLEAN_OPTIONS = [
     {
@@ -112,7 +112,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-full min-w-full pt-20 flex flex-col items-center justify-between">
+    <div className="min-h-full min-w-full py-6 xs:py-10 flex flex-col items-center justify-between">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 p-4 xs:p-6 rounded-lg min-w-fit bg-neutral-200 dark:bg-neutral-700"
@@ -121,13 +121,13 @@ export default function Home() {
         <label
           htmlFor="password-length"
           style={{ marginTop: 20 }}
-          className="text-base xs:text-md"
+          className="text-sm xs:text-md"
         >
           Password Length: {passwordLength}
         </label>
         <div
           className={
-            "flex justify-between items-center gap-2 w-64 xs:w-80 text-base xs:text-md bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg font-semibold text-neutral-800 dark:text-neutral-100"
+            "flex justify-between items-center gap-2 w-64 xs:w-80 text-sm xs:text-md bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg font-medium xs:font-semibold text-neutral-800 dark:text-neutral-100"
           }
         >
           <span>4</span>
@@ -158,7 +158,7 @@ export default function Home() {
         ))}
 
         <button
-          className={`flex items-center justify-center max-h-10 w-full mt-4 py-3 rounded-lg font-bold text-base xs:text-md text-neutral-600 hover:text-neutral-100 dark:text-neutral-100 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-800 hover:dark:bg-neutral-600 transition-colors duration-200 ${
+          className={`flex items-center justify-center max-h-10 w-full mt-4 py-3 rounded-lg font-bold text-sm xs:text-md text-neutral-600 hover:text-neutral-100 dark:text-neutral-100 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-800 hover:dark:bg-neutral-600 transition-colors duration-200 ${
             loadingPassword && "cursor-not-allowed opacity-50"
           }`}
           type="submit"

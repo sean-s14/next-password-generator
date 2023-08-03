@@ -27,12 +27,14 @@ export default function Clipboard({
       {text ? (
         <>
           <span>{text}</span>
-          <span className="absolute bottom-1 right-1 text-xs">
+          <span className="absolute bottom-1 right-1 text-xs text-neutral-500 dark:text-neutral-400">
             click to copy
           </span>
         </>
       ) : (
-        <span className="opacity-50">generate key below</span>
+        <span className="opacity-50 text-sm xs:text-base">
+          generate key below
+        </span>
       )}
     </button>
   );

@@ -45,6 +45,7 @@ export default function Navigation() {
           progressStyle={{
             background: "#07bc0c",
           }}
+          className="max-w-[80%] text-sm xs:text-base ml-10 xs:ml-0 mr-10 xs:mr-0 mt-4 xs:mt-0"
         />
       </div>
 
